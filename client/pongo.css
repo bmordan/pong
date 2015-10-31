@@ -1,4 +1,7 @@
 span {
+  white-space: nowrap;
+  overflow: hidden;
+  font-size: 500%;
   position: absolute;
-  bottom: 0;
+  bottom: 50px;
 }
