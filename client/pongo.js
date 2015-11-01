@@ -2,8 +2,8 @@ var color = '#'+Math.random().toString(16).substr(-6)
 var updateBatPosition = function (e) { Streamy.emit('update', { data: e.pageX, color: color })}
 var connections = new ReactiveVar(1)
 
-Streamy.on('connections', (connected) => connections.set(connected.data))
-
+Streamy.on('connectedUpdate', (connected) => connections.set(connected.data))
+Streamy.on('purge', (id) => $('#'+id.data).remove())
 Streamy.on('motionUpdate', (deltas) => {
   _.each(deltas, (delta) => {
     for (k in delta) {
@@ -17,7 +17,6 @@ Streamy.on('motionUpdate', (deltas) => {
 Template.bat.onRendered( () => document.onmousemove = updateBatPosition)
 
 Template.connected.onRendered( () => Meteor.call('broadcastConnections'))
-
 Template.connected.helpers({
   getConnected: () => connections.get()
 })

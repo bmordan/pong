@@ -6,7 +6,7 @@ Meteor.startup(() => {
 })
 
 Meteor.methods({
-  broadcastConnections: () => Streamy.broadcast('connections', { data: _.keys(connections).length}),
+  broadcastConnections: () => Streamy.broadcast('connectedUpdate', { data: _.keys(connections).length}),
   broadcastLoop: () => Streamy.broadcast('motionUpdate', { data: connections }),
   assignColor: () => _.keys(connections)
 })
@@ -17,6 +17,7 @@ Streamy.onConnect( (s) => {
 })
 Streamy.onDisconnect( (s) => {
   delete connections[s.id]
+  Streamy.broadcast('purge', {data: s.id})
   Meteor.call('broadcastConnections')
 })
 
