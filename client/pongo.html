@@ -3,6 +3,7 @@
 </head>
 
 <body>
+  {{>ball}}
   {{>connected}}
   {{>bat}}
 </body>
@@ -13,4 +14,8 @@
 
 <template name="bat">
   <section id="bat-run"></section>
+</template>
+
+<template name="ball">
+  <div id="ball">*</div>
 </template>

@@ -15,8 +15,25 @@ Streamy.on('motionUpdate', (deltas) => {
 })
 
 Template.bat.onRendered( () => document.onmousemove = updateBatPosition)
-
 Template.connected.onRendered( () => Meteor.call('broadcastConnections'))
 Template.connected.helpers({
   getConnected: () => connections.get()
+})
+
+Template.ball.onRendered(() => {
+  var ball = new ui.Actor({
+    element: '#ball',
+  })
+  var ballPhysics = new ui.Simulate({
+    values: {
+      y: {
+        velocity: 300,
+        acceleration: 300,
+        min: 0,
+        max: window.innerHeight - 140,
+        bounce: 1
+      }
+    }
+  })
+  ball.start(ballPhysics)
 })
