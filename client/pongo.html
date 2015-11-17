@@ -3,13 +3,18 @@
 </head>
 
 <body>
-  {{>ball}}
   {{>connected}}
+  {{>scores}}
+  {{>ball}}
   {{>bat}}
 </body>
 
 <template name="connected">
-  <samp>{{getConnected}}</samp>
+  <samp>connected: {{getConnected}}</samp>
+</template>
+
+<template name="scores">
+  <samp>score: {{getScore}}</samp>
 </template>
 
 <template name="bat">
@@ -17,5 +22,5 @@
 </template>
 
 <template name="ball">
-  <div id="ball">*</div>
+  <div id="ball">.</div>
 </template>
